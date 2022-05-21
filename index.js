@@ -9,13 +9,14 @@ app.use(cors());
 app.use(express.json()); //inbuilt middleware //convert req body into json format
 mongo.connect();
 
+
+app.use('/users',getRouter);
+
 app.use('/',(req,res,next)=>{
     res.send('hi heroku')
     console.log('middleware')
     next();
 })
-
-app.use('/users',getRouter);
 
 const port=process.env.PORT || 3001
 app.listen(port,function(){
