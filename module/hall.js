@@ -53,9 +53,9 @@ module.exports.createRoom = async (req,res,next)=>{
 }
 
 //create booked data
-module.exports.createBookedData=async (req,res,next)=>{
+module.exports.createBookedData = async (req,res,next)=>{
     try{
-        var mongoRes=await mongo.selectedDb.collection('BookedData').insert(req.body);
+        var mongoRes = await mongo.selectedDb.collection('BookedData').insert(req.body);
         res.send(mongoRes);
     }catch(err){
         console.log(err)
@@ -68,7 +68,7 @@ module.exports.createBookedRoomList = async (req,res,next)=>{
         var mongoRes = await mongo.selectedDb.collection('BookedData').aggregate([
             {
                 $lookup:{
-                    from:'hallBook',
+                    from:'hall booking',
                     localField:'roomId',
                     foreignField:'roomId',
                     as:'BookedRoomList'
@@ -102,7 +102,7 @@ module.exports.createBookedCustomer=async (req,res,next)=>{
         var mongoRes=await mongo.selectedDb.collection('BookedData').aggregate([
             {
                 $lookup:{
-                    from:'hallBook',
+                    from:'hall booking',
                     localField:'roomId',
                     foreignField:'roomId',
                     as:'BookedRoomList'
